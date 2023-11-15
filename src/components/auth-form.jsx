@@ -50,7 +50,7 @@ export const Auth= ({title, handleClick, name}) => {
                     handleClick={handleClick}
                 />
                 {name === 'Login'
-                    ? <SwitchAuth>У вас нет аккаунта? <LinkStyle to='/register'>Зарегестрироваться!</LinkStyle></SwitchAuth>
+                    ? <SwitchAuth>У вас нет аккаунта? <LinkStyle to='/register'>Зарегистрироваться!</LinkStyle></SwitchAuth>
                     : <SwitchAuth>Уже есть аккаунт? <LinkStyle to='/login'>Войти!</LinkStyle></SwitchAuth>
                 }
             </LoginBox> 
