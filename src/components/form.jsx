@@ -2,9 +2,10 @@ import { useState } from 'react';
 
 import styled from 'styled-components';
 import { LiaEyeSlashSolid, LiaEyeSolid  } from "react-icons/lia";
+import { Button } from './button';
 
 
-const FormBox = styled.form``
+const FormBox = styled.div``
 const UserBox = styled.div`
     position: relative;
 `
@@ -30,6 +31,7 @@ const Input = styled.input.attrs((prop)=>({
     margin-bottom: 30px;
     border: none;
     border-bottom: 1px solid #fff;
+    border-color: #fff;
     outline: none;
     background: transparent;
     &:focus ~ ${Label} {
@@ -49,45 +51,40 @@ const ExtraBox = styled.div`
     display: flex;
     justify-content: space-between;
 `
-const Btn = styled.button`
-    padding: 10px 20px;
-    font-weight: bold;
-    color: #fff;
-    background:#212121;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    text-transform: uppercase;
-    overflow: hidden;
-    transition: .5s;
-    letter-spacing: 3px;
-    cursor: pointer;
-    &:hover {
-        background: #fff;
-        color: #272727;
-        border-radius: 5px;
-    }
-`
 
-export const Form = () => {
-    const [value, setValue] = useState('password');
-    
+export const Form = ({title, handleClick}) => {
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+    const [vissiblePass, setVissiblePass] = useState('password');
+
     return (
         <FormBox>
             <UserBox>
-                <Input name={'Email'} />
+                <Input 
+                    name={'Email'} 
+                    type={'text'} 
+                    value={email}
+                    onChange={(e)=>setEmail(e.target.value)}
+                />
                 <Label>Email</Label>
             </UserBox> 
             <UserBox>
-                <Input name={'Password'} type={value}/>
+                <Input 
+                    name={'Password'} 
+                    type={vissiblePass}
+                    value={pass}
+                    onChange={(e)=>setPass(e.target.value)}
+                />
                 <Label>Password</Label> 
             </UserBox> 
             <ExtraBox>
-                <Btn>submit</Btn>
-                {value === "password"                    
-                    ? <LiaEyeSlashSolid size={'24px'} color={'white'} cursor={'pointer'} onClick={()=>{setValue('text')}}/>
-                    : <LiaEyeSolid size={'24px'} color={'white'} cursor={'pointer'} onClick={()=>{setValue('password')}}/>
+
+                <Button onClick={()=>handleClick(email, pass)}>{title}</Button>
+                {vissiblePass === "password"                    
+                    ? <LiaEyeSlashSolid size={'24px'} color={'white'} cursor={'pointer'} onClick={()=>{setVissiblePass('text')}}/>
+                    : <LiaEyeSolid size={'24px'} color={'white'} cursor={'pointer'} onClick={()=>{setVissiblePass('password')}}/>
                 }
+
             </ExtraBox>
         </FormBox>
     )      
