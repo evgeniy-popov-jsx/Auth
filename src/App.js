@@ -1,9 +1,10 @@
+import { Auth } from './components/auth-form';
 
 function App() {
   return (
-    <div className="App">
-     start
-    </div>
+    <>
+      <Auth />
+    </>
   );
 }
 
