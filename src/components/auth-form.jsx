@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Container } from './container'; 
 import { Form } from './form';
+import { Link } from 'react-router-dom';
 
 const LoginBox = styled.div`
     position: absolute;
@@ -28,7 +29,7 @@ const SwitchAuth = styled.p`
     color: #aaa;
     font-size: 14px;
 `
-const LinkAuth = styled.a`
+const LinkStyle = styled(Link)`
     color: #fff;
     text-decoration: none;
     &:hover {
@@ -39,13 +40,19 @@ const LinkAuth = styled.a`
     }
 `
 
-export const Auth= () => {
+export const Auth= ({title, handleClick, name}) => {
     return (
         <Container>
             <LoginBox>
-                <AuthStatus>Login</AuthStatus>
-                <Form />
-                <SwitchAuth>Don't have an account? <LinkAuth>Sign up!</LinkAuth></SwitchAuth>
+                <AuthStatus>{name}</AuthStatus>
+                <Form 
+                    title={title}
+                    handleClick={handleClick}
+                />
+                {name === 'Login'
+                    ? <SwitchAuth>У вас нет аккаунта? <LinkStyle to='/register'>Зарегестрироваться!</LinkStyle></SwitchAuth>
+                    : <SwitchAuth>Уже есть аккаунт? <LinkStyle to='/login'>Войти!</LinkStyle></SwitchAuth>
+                }
             </LoginBox> 
         </Container>  
     ) 
